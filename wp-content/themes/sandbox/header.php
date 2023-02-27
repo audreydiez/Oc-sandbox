@@ -26,17 +26,35 @@
 
 	<body <?php body_class(); ?>>
 
-		<div class="test">header</div>
+		<a class="test" href="<?php echo get_home_url(); ?>">C'est le header</a>
 		<?php
 		wp_body_open();
 		?>
 
-		<?php
-			wp_nav_menu( array(
-				//'theme_location' => is_user_logged_in() ? 'logged-in-menu' : 'logged-out-menu'
-				'theme_location' => "primary"
-			) );
-		?>
+		<nav class="sb-nav">
+			<?php
+				/* wp_nav_menu( array(
+					//'theme_location' => is_user_logged_in() ? 'logged-in-menu' : 'logged-out-menu'
+					'theme_location' => 'primary',
+					'container' => 'ul',
+					'menu_class' => 'sb-nav-list',
+					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
+					
 
+				) ); */
+				wp_nav_menu([
+					'theme_location' => 'primary',
+					'container' => 'ul',
+					'menu_class' => 'sb-nav-list',
+					// custom hooks
+					'add_li_class'  => 'sb-nav-item',
+					'add_a_class' => 'a-link'
+				 ])
+			?>
+
+		<?= get_search_form() ?>
+		</nav>
+
+		<hr>
 
 	
