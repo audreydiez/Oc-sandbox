@@ -25,6 +25,15 @@ get_header();
             <article>
                 <h2><?php the_title(); ?></h2>
                 <?php the_content() ?>
+
+                <?php if (get_post_meta(get_the_ID(), 'sponsoring', true) === '1') : ?>
+                    <!--  ou get_post_meta(get_the_ID(), SponsoMetaBox::META_KEY, true) -->
+                    <div> Cet article est sponso</div>
+                    <?php var_dump(get_post_meta(get_the_ID(), 'sponsoring', true)) ?>
+                <?php endif; ?>
+
+                <?php the_terms(get_the_ID(), 'sport', '<br/>Sport: ', ', ') ?>
+
             </article>
         <?php endwhile;
     else : ?>

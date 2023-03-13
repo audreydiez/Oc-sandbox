@@ -61,6 +61,7 @@ function active_class_menu($classes, $item)
   return $classes;
 }
 
+// Metadonnées -----------------------------------------------------------------------------------------------
 // id, name, callback function, type of page applying
 function add_custom_metabox()
 {
@@ -97,6 +98,32 @@ function save_sponso_box($post_id)
   }
 }
 
+// Metadonnées -----------------------------------------------------------------------------------------------
+
+// taxonomies
+function register_sport()
+{
+  register_taxonomy('sport', 'post', [
+    'labels' => [
+      'name' => 'Sport',
+      'singular_name'     => 'Sport',
+      'plural_name'       => 'Sports',
+      'search_items'      => 'Rechercher des sports',
+      'all_items'         => 'Tous les sports',
+      'edit_item'         => 'Editer le sport',
+      'update_item'       => 'Mettre à jour le sport',
+      'add_new_item'      => 'Ajouter un nouveau sport',
+      'new_item_name'     => 'Ajouter un nouveau sport',
+      'menu_name'         => 'Sport',
+    ],
+    'show_in_rest' => true,
+    'hierarchical' => true,
+    'show_admin_column' => true,
+  ]);
+}
+
+
+
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 add_action('after_setup_theme', 'register_my_menu');
 add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
@@ -105,3 +132,8 @@ add_filter('nav_menu_css_class', 'active_class_menu', 10, 2);
 // Ajouter une métaboxe
 add_action('add_meta_boxes', 'add_custom_metabox');
 add_action('save_post', 'save_sponso_box');
+
+add_action('init', 'register_sport');
+
+/* require_once('metaboxes/sponsoring.php');
+SponsoMetaBox::register(); */
