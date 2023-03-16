@@ -5,7 +5,7 @@
 <p>
     <?= esc_html(get_queried_object()->description) ?>
 </p>
-
+// Affichage des taxo disponibles pour le sport
 <?php $sports = get_terms(['taxonomy' => 'sport']); ?>
 <!-- Si le tableau existe on y va -->
 <?php if (is_array($sports)) : ?>
@@ -18,6 +18,7 @@
     </ul>
 <?php endif ?>
 
+// Si c'est dispo, on affiche
 <?php if (have_posts()) : ?>
     <div class="row">
 

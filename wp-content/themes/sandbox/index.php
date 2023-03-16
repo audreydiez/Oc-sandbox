@@ -25,6 +25,7 @@ get_header();
             <article>
                 <h2><?php the_title(); ?></h2>
                 <?php the_content() ?>
+                <?php the_post_thumbnail(); ?>
 
                 <?php if (get_post_meta(get_the_ID(), 'sponsoring', true) === '1') : ?>
                     <!--  ou get_post_meta(get_the_ID(), SponsoMetaBox::META_KEY, true) -->

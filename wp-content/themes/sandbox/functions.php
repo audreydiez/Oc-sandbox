@@ -122,6 +122,19 @@ function register_sport()
   ]);
 }
 
+function custom_post_types()
+{
+  register_post_type('appart', [
+    'label' => 'Appart',
+    'public' => true,
+    'menu_position' => 3,
+    'menu_icon' => 'dashicons-building',
+    'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+    'show_in_rest' => true,
+    'has_archive' => true,
+  ]);
+}
+
 
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
@@ -134,6 +147,10 @@ add_action('add_meta_boxes', 'add_custom_metabox');
 add_action('save_post', 'save_sponso_box');
 
 add_action('init', 'register_sport');
+
+// Custom posts types
+add_theme_support('post-thumbnails');
+add_action('init', 'custom_post_types');
 
 /* require_once('metaboxes/sponsoring.php');
 SponsoMetaBox::register(); */
