@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -14,13 +15,16 @@
 ?>
 
 <hr>
-			<footer id="site-footer" class="header-footer-group">
+<footer id="site-footer" class="header-footer-group">
 
-				footer
+	footer
+	<br>
+	Les horaires sont : <?= get_option('agence_horaire') ?>
 
-			</footer><!-- #site-footer -->
+</footer><!-- #site-footer -->
 
-		
 
-	</body>
+
+</body>
+
 </html>

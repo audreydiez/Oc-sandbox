@@ -152,5 +152,8 @@ add_action('init', 'register_sport');
 add_theme_support('post-thumbnails');
 add_action('init', 'custom_post_types');
 
-/* require_once('metaboxes/sponsoring.php');
-SponsoMetaBox::register(); */
+//require_once('metaboxes/sponsoring.php');
+//SponsoMetaBox::register(); 
+
+require_once('options/agence.php');
+AgenceMenuPage::register();
