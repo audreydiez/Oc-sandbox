@@ -184,3 +184,21 @@ add_filter('manage_post_posts_custom_column', function ($column, $postId) {
     echo '<div class="bullet bullet-">' . $value . '</div>';
   }
 }, 10, 2);
+
+
+
+// Sidebar
+function add_home_sidebar()
+{
+  register_sidebar([
+    'name' => 'Sidebar home',
+    'id' => 'home-sidebar',
+    'description' => 'La sidebar de la page home',
+    'before_widget' => '<div class="widget %2$s" id="%1$s">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3 class="widget-title">',
+    'after_title' => '</h3>',
+  ]);
+}
+
+add_action('widgets_init', 'add_home_sidebar');
