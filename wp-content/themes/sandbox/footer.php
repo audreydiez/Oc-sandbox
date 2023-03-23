@@ -21,6 +21,12 @@
 	<br>
 	Les horaires sont : <?= get_option('agence_horaire') ?>
 
+	<br>
+	<br>
+	un widget mis dans le footer :
+	<br>
+	<?php the_widget(YoutubeWidget::class, ['title' => 'Salut', 'youtube' => 'Lj0U4yrYrps']); ?>
+
 </footer><!-- #site-footer -->
 
 

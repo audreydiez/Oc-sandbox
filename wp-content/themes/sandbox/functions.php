@@ -188,8 +188,14 @@ add_filter('manage_post_posts_custom_column', function ($column, $postId) {
 
 
 // Sidebar
+require_once('widgets/YoutubeWidget.php');
+
 function add_home_sidebar()
 {
+  /// Ajouter un widget
+
+  register_widget(YoutubeWidget::class);
+
   register_sidebar([
     'name' => 'Sidebar home',
     'id' => 'home-sidebar',
