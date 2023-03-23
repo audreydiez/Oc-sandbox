@@ -71,7 +71,7 @@ function add_custom_metabox()
 function render_sponso_box()
 {
   global $post;
-  $value = get_post_meta($post->ID, 'coucou_checkbox', true);
+  $value = get_post_meta($post->ID, 'sponsoring', true);
   $checked = ($value == '1') ? 'checked' : '';
 ?>
   <input type="checkbox" value="1" name="sponsoring" <?php echo $checked; ?>>
@@ -137,6 +137,8 @@ function custom_post_types()
 
 
 
+
+
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 add_action('after_setup_theme', 'register_my_menu');
 add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
@@ -155,5 +157,30 @@ add_action('init', 'custom_post_types');
 //require_once('metaboxes/sponsoring.php');
 //SponsoMetaBox::register(); 
 
+// Add option in admin menu
 require_once('options/agence.php');
 AgenceMenuPage::register();
+
+// ajouter des colonnes supplémentaires dans le listing des articles
+add_filter('manage_post_posts_columns', function ($columns) {
+  $newColumns = [];
+  foreach ($columns as $k => $v) {
+    if ($k === 'date') {
+      $newColumns['sponso'] = 'Article sponsorisé ?';
+    }
+    $newColumns[$k] = $v;
+  }
+  return $newColumns;
+});
+add_filter('manage_post_posts_custom_column', function ($column, $postId) {
+  // var_dump(get_post_meta($postId, 'sponsoring'));
+  //var_dump($column);
+  if ($column === 'sponso') {
+    if (!empty(get_post_meta($postId, 'sponsoring'))) {
+      $value = 'oui';
+    } else {
+      $value = 'non';
+    }
+    echo '<div class="bullet bullet-">' . $value . '</div>';
+  }
+}, 10, 2);
