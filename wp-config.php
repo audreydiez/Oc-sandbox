@@ -29,7 +29,7 @@ define('DB_NAME', 'oc_sandbox');
 define('DB_USER', 'root');
 
 /** Mot de passe de la base de données MySQL. */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '');
 
 /** Adresse de l’hébergement MySQL. */
 define('DB_HOST', 'localhost');
@@ -89,7 +89,7 @@ $table_prefix = 'wp_';
  */
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
+define('WP_DEBUG_DISPLAY', true);
 
 /* C’est tout, ne touchez pas à ce qui suit ! Bonne publication. */
 

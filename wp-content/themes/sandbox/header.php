@@ -55,6 +55,14 @@
 		<?= get_search_form() ?>
 		</nav>
 
+		<?php
+			// Afficher le logo dans le header
+			$logo = get_theme_mod( 'header_logo' );
+			if ( $logo ) {
+			echo '<img src="' . esc_url( $logo ) . '" alt="Header Logo">';
+			}
+		?>
+
 		<hr>
 
 	

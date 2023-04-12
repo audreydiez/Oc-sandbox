@@ -13,6 +13,9 @@ function theme_enqueue_styles()
   wp_enqueue_style('theme-style', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime(get_stylesheet_directory() . '/assets/css/main.css'));
 }
 
+// Ajout des options du customizer
+require get_template_directory() .'/customizer/header-logo.php';
+
 function register_my_menu()
 {
   register_nav_menu('primary', 'Menu principal haut');
@@ -208,3 +211,5 @@ function add_home_sidebar()
 }
 
 add_action('widgets_init', 'add_home_sidebar');
+
+// _____________________________________________________________________________________________________
