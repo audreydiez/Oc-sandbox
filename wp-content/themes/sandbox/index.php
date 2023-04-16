@@ -20,6 +20,8 @@ get_header();
 
 <main id="site-content">
 
+Template  index pour la loop 
+
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
             <article>
@@ -34,6 +36,41 @@ get_header();
                 <?php endif; ?>
 
                 <?php the_terms(get_the_ID(), 'sport', '<br/>Sport: ', ', ') ?>
+
+                </br></br>Article liés au tennis : (exemple)
+                
+                <?php 
+
+                    $query = new WP_Query([
+                        'post__not_in' => [get_the_ID()],
+                        'post_type' => 'post',
+                        'posts_per_page' => 2,
+                        'orderby' => 'rand',
+                        'tax_query' => [
+                        [
+                            'taxonomy' => 'sport',
+                            'field' => 'slug',
+                            'terms' => 'tennis'
+                        ]
+                        ],
+                        'meta_query' => [
+                        [
+                            'key' => 'sponsoring',
+                            'compare' => 'EXISTS'
+                        ]
+                        ]
+                    ]);    
+                ?>
+
+                <?php while ($query->have_posts()) : $query->the_post();
+                ?>
+                <div class="col-sm-4">
+                <h3>TROUVé : <?php the_title(); ?></h3>
+                    <!-- <?php get_template_part('parts/card', 'post'); ?> -->
+                </div>
+                <!-- // Reset la boucle -->
+                <?php endwhile; wp_reset_postdata(); ?>
+
 
             </article>
         <?php endwhile;

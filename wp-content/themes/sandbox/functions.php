@@ -213,3 +213,45 @@ function add_home_sidebar()
 add_action('widgets_init', 'add_home_sidebar');
 
 // _____________________________________________________________________________________________________
+// ajouter la colonne à la liste des colonnes gràce au filtre manage_{$post_type}_posts_columns
+
+add_filter('manage_appart_posts_columns', function ($columns) {
+  return  [
+    'cb' => $columns['cb'],
+    'thumbnail' => 'miniature',
+    'title' => $columns['title'],
+    'date' => $columns['date'],
+  ];
+});
+
+add_filter('manage_appart_posts_custom_column', function ($column, $postId) {
+  if ($column === 'thumbnail') {
+    the_post_thumbnail('thumbnail', $postId, ['class' => 'img-fluid']);
+  }
+}, 10, 2);
+
+// _____________________________________________________________________________________________________
+// ajouter la colonne is sponso ? aux articles
+
+add_filter('manage_post_posts_columns', function ($columns) {
+  $newColumns = [];
+  foreach($columns as $key => $value) {
+      if ($key === 'date') {
+          $newColumns['sponso'] = 'Article sponsorisé ?';
+      }
+      // Réassignement des colonnes
+      $newColumns[$key] = $value;
+  }
+  return $newColumns;
+});
+// Ajouter le contenu de la colonne
+add_filter('manage_post_posts_custom_column', function ($column, $postId) {
+  if ($column === 'sponso') {
+      if (!empty(get_post_meta($postId, 'sponsoring', true))) {
+          $class = 'yes';
+      } else {
+          $class = 'no';
+      }
+      echo '<div class="bullet bullet-' . $class . '"></div>';
+  }
+}, 10, 2);
