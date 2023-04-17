@@ -5,6 +5,11 @@
 
 //remove_all_filters('wp_nav_menu_args');
 
+require_once 'walker/commentWalker.php';
+/* Pour pouvoir modifier html5_comment dans le walker */
+add_theme_support('html5');
+
+
 function theme_enqueue_styles()
 {
   //wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');  
@@ -255,3 +260,20 @@ add_filter('manage_post_posts_custom_column', function ($column, $postId) {
       echo '<div class="bullet bullet-' . $class . '"></div>';
   }
 }, 10, 2);
+
+
+/* Modification des commentaires */
+add_filter('comment_form_default_fields', function ($fields) {
+   $fields['author'] = '<div class="form-group"><label for="author!">Nom</label><input type="text" class="form-control" id="author" name="author" value="" required></div>';
+  $fields['email'] = '<div class="form-group"><label for="email">Email!</label><input type="email" class="form-control" id="email" name="email" value="" required></div>';
+  $fields['url'] = '<div class="form-group"><label for="url">Site web!</label><input type="url" class="form-control" id="url" name="url" value=""></div>';
+  /* var_dump($fields); */
+  return $fields;
+});
+add_filter('comment_form_defaults', function ($fields) {
+  $fields['comment_field'] = '<div class="form-group"><label for="comment">Commentaire</label><textarea class="form-control" id="comment" name="comment" rows="3" required></textarea></div>';
+  $fields['class_submit'] = 'btn btn-primary';
+  /* var_dump($fields);   */
+  return $fields;  
+});
+
